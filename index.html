@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Pengelolaan Penjualan Toko Kelontong</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        header {
+            background: linear-gradient(to right, #9ea286, #79a57b);
+            color: rgb(12, 10, 10);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: rgb(225, 213, 213);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+        input, select {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"], button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <body background="https://plus.unsplash.com/premium_photo-1723983555804-4f76968a2a2d?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+       <header>
+        <h1>Program Pengelolaan Penjualan Toko Kelontong</h1>
+        </header>
+        <h2>Entri Data Produk</h2>
+        <form id="formProduk">
+            <input type="text" id="namaProduk" placeholder="Nama Produk" required>
+            <input type="number" id="hargaProduk" placeholder="Harga" required>
+            <input type="number" id="stokProduk" placeholder="Stok" required>
+            <input type="submit" value="Tambah">
+        </form>
+        <table id="tabelProduk">
+            <tr>
+                <th>Nama Produk</th>
+                <th>Harga</th>
+                <th>Stok</th>
+            </tr>
+        </table>
+
+        <h2>Entri Data Pelanggan</h2>
+        <form id="formPelanggan">
+            <input type="text" id="namaPelanggan" placeholder="Nama Pelanggan" required>
+            <input type="text" id="alamatPelanggan" placeholder="Alamat" required>
+            <input type="text" id="teleponPelanggan" placeholder="Nomor Telepon" required>
+            <input type="submit" value="Tambah">
+        </form>
+        <table id="tabelPelanggan">
+            <tr>
+                <th>Nama Pelanggan</th>
+                <th>Alamat</th>
+                <th>Telepon</th>
+            </tr>
+        </table>
+        
+        <h2>Transaksi Penjualan</h2>
+        <form id="formTransaksi">
+            <input type="text" id="produkJual" placeholder="Nama Produk" required>
+            <input type="number" id="jumlahJual" placeholder="Jumlah" required>
+            <input type="date" id="tanggalJual" required>
+            <input type="submit" value="Jual">
+        </form>
+        
+        <h2>Laporan Faktur Penjualan</h2>
+        <table id="tabelFaktur">
+            <tr>
+                <th>Produk</th>
+                <th>Jumlah</th>
+                <th>Total Harga</th>
+                <th>Tanggal</th>
+            </tr>
+        </table>
+        
+        <h2>Rekapitulasi Penjualan</h2>
+        <table id="tabelRekap">
+            <tr>
+                <th>Periode</th>
+                <th>Total Pendapatan</th>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        let totalPendapatan = 0;
+        
+        document.getElementById("formProduk").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let nama = document.getElementById("namaProduk").value;
+            let harga = document.getElementById("hargaProduk").value;
+            let stok = document.getElementById("stokProduk").value;
+            let tabel = document.getElementById("tabelProduk");
+            let row = tabel.insertRow();
+            row.insertCell(0).innerText = nama;
+            row.insertCell(1).innerText = harga;
+            row.insertCell(2).innerText = stok;
+            this.reset();
+        });
+
+        document.getElementById("formPelanggan").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let nama = document.getElementById("namaPelanggan").value;
+            let alamat = document.getElementById("alamatPelanggan").value;
+            let telepon = document.getElementById("teleponPelanggan").value;
+            let tabel = document.getElementById("tabelPelanggan");
+            let row = tabel.insertRow();
+            row.insertCell(0).innerText = nama;
+            row.insertCell(1).innerText = alamat;
+            row.insertCell(2).innerText = telepon;
+            this.reset();
+        });
+
+        document.getElementById("formTransaksi").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let produk = document.getElementById("produkJual").value;
+            let jumlah = document.getElementById("jumlahJual").value;
+            let tanggal = document.getElementById("tanggalJual").value;
+            let harga = 10000; // Harga dummy
+            let total = jumlah * harga;
+            totalPendapatan += total;
+            let tabel = document.getElementById("tabelFaktur");
+            let row = tabel.insertRow();
+            row.insertCell(0).innerText = produk;
+            row.insertCell(1).innerText = jumlah;
+            row.insertCell(2).innerText = total;
+            row.insertCell(3).innerText = tanggal;
+            let rekap = document.getElementById("tabelRekap");
+            let rowRekap = rekap.insertRow();
+            rowRekap.insertCell(0).innerText = "Total";
+            rowRekap.insertCell(1).innerText = totalPendapatan;
+            this.reset();
+        });
+    </script>
+</body>
+</html>
